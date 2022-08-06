@@ -16,32 +16,52 @@ RSpec.describe Cypher do
       expect(cypher).to be_a(Cypher)
     end
 
-    xit 'has a char_set to choose from' do
+    it 'has a char_set to choose from' do
       allow(cypher).to receive(:char_set).and_return('letter array')
       expect(cypher.char_set).to eq('letter array')
     end
 
-    xit 'can process a key into a deadbolt' do
+    it 'can process a key into a key generator' do
       # will eventually create a random 5 digit number
       # will need to .rjust 0 if only 4 numbers
-      # A = [0][1], B = [1][2], C = [2][3] D = [3][4]
-      expect(cypher.deadbolt).to eq({'A': 02, 'B': 27, 'C': 71, 'D': 15})
+      # 'A' = [0][1], 'B' = [1][2], 'C' = [2][3] 'D' = [3][4]
+      # ['A','B', 'C', 'D']
+      # [02,27,71,15]
+      expect(cypher.key_gen).to eq("02715")
     end
 
-    xit 'can process a date to ballast' do
+    it 'can generate a date' do
       #will generate a today's date, format to DDMMYY
       #convert to integer, square the integer, and use last 4 digits
-      expect(cypher.ballast).to eq('1025')
+      expect(cypher.date_gen).to eq("040895")
     end
 
-    xit 'can create an offset' do
-      # add deadbolt and ballast
-      expect(cypher.offset).to eq({'A': 1, 'B': 0, 'C': 2, 'D': 5})
+    it 'can create an A shift' do
+      # add key_gen params to date_gen param
+      expect(cypher.a_shift).to eq(3)
     end
 
-    xit 'can apply whisk a meassage' do
+    it 'can create an B shift' do
+      # add key_gen params to date_gen param
+      expect(cypher.a_shift).to eq(27)
+    end
+
+    it 'can create an C shift' do
+      # add key_gen params to date_gen param
+      expect(cypher.a_shift).to eq(71)
+    end
+
+    it 'can create an D shift' do
+      # add key_gen params to date_gen param
+      expect(cypher.a_shift).to eq(15)
+    end
+
+    xit 'can whisk a meassage' do
       # iterate through message and apply offest to char
       # in approptiate orders of 4.
+      enigma.encrypt('hello world', '02715', '040895')
+ 
+      binding.pry
       expect(cypher.whisk).to eq('keder ohulw')
     end
   end
