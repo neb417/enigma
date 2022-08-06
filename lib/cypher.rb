@@ -1,3 +1,4 @@
+require 'enigma'
 require 'date'
 require 'time'
 require 'pry'
@@ -5,7 +6,7 @@ require 'pry'
 class Cypher
 
   def initialize
-    @key = []
+    # key = []
   end
 
   def char_set
@@ -57,6 +58,15 @@ class Cypher
     date_num = date_num.digits[0]
     key_num = "#{key_gen[3]}#{key_gen[4]}"
     shift = key_num.to_i + date_num
+  end
+
+  def breakout(enigma)
+    split = enigma.message.split("")
+    # shift_array = []
+    # binding.pry
+    split.each_slice(4).to_a# {|letter| shift_array << letter}
+    # shift_array
+
   end
 
   # def whisk

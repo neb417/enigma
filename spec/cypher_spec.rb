@@ -60,12 +60,23 @@ RSpec.describe Cypher do
       expect(cypher.d_shift).to eq(20)
     end
 
+    it 'can breakout a message into parts' do
+      # iterate through message and apply offest to char
+      # in approptiate orders of 4.
+      enigma.encrypt('hello world', '02715', '040895')
+      # message = enigma.message
+      # binding.pry
+      expect(cypher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+    end
+
     xit 'can whisk a meassage' do
       # iterate through message and apply offest to char
       # in approptiate orders of 4.
       enigma.encrypt('hello world', '02715', '040895')
- 
-      binding.pry
+      message = enigma.message
+
+      message.each_slice(2)
+      # binding.pry
       expect(cypher.whisk).to eq('keder ohulw')
     end
   end
