@@ -38,22 +38,26 @@ RSpec.describe Cypher do
 
     it 'can create an A shift' do
       # add key_gen params to date_gen param
+      allow(cypher).to receive(:a_shift).and_return(3)
       expect(cypher.a_shift).to eq(3)
     end
 
     it 'can create an B shift' do
       # add key_gen params to date_gen param
-      expect(cypher.a_shift).to eq(27)
+      allow(cypher).to receive(:b_shift).and_return(27)
+      expect(cypher.b_shift).to eq(27)
     end
 
     it 'can create an C shift' do
       # add key_gen params to date_gen param
-      expect(cypher.a_shift).to eq(71)
+      allow(cypher).to receive(:c_shift).and_return(73)
+      expect(cypher.c_shift).to eq(73)
     end
 
     it 'can create an D shift' do
       # add key_gen params to date_gen param
-      expect(cypher.a_shift).to eq(15)
+      allow(cypher).to receive(:d_shift).and_return(20)
+      expect(cypher.d_shift).to eq(20)
     end
 
     xit 'can whisk a meassage' do

@@ -38,6 +38,27 @@ class Cypher
     shift = key_num.to_i + date_num
   end
 
+  def b_shift
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[2]
+    key_num = "#{key_gen[1]}#{key_gen[2]}"
+    shift = key_num.to_i + date_num
+  end
+
+  def c_shift
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[1]
+    key_num = "#{key_gen[2]}#{key_gen[3]}"
+    shift = key_num.to_i + date_num
+  end
+
+  def d_shift
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[0]
+    key_num = "#{key_gen[3]}#{key_gen[4]}"
+    shift = key_num.to_i + date_num
+  end
+
   # def whisk
   #   binding.pry
   # end
