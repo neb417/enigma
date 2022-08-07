@@ -77,7 +77,34 @@ RSpec.describe Cypher do
 
       # message.each_slice(2)
       # binding.pry
-      expect(cypher.whisk(enigma)).to eq('k')
+      expect(cypher.whisk(enigma)).to eq([["k", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+    end
+
+    it 'can create an A shift' do
+      # add key_gen params to date_gen param
+      enigma.encrypt('hello world', '02715', '040895')
+      cypher.breakout(enigma)
+
+
+      expect(cypher.a_shift(enigma)).to eq([["k", "e", "l", "l"], ["r", " ", "w", "o"], ["u", "l", "d"]])
+    end
+
+    xit 'can create an B shift' do
+      # add key_gen params to date_gen param
+      allow(cypher).to receive(:b_shift).and_return(27)
+      expect(cypher.b_shift).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+    end
+
+    xit 'can create an C shift' do
+      # add key_gen params to date_gen param
+      allow(cypher).to receive(:c_shift).and_return(73)
+      expect(cypher.c_shift).to eq([["h", "e", "d", "l"], ["o", " ", "o", "o"], ["w", "l", "w"]])
+    end
+
+    xit 'can create an D shift' do
+      # add key_gen params to date_gen param
+      allow(cypher).to receive(:d_shift).and_return(20)
+      expect(cypher.d_shift).to eq([["h", "e", "l", "r"], ["o", " ", "w", "h"], ["r", "l", "d"]])
     end
   end
 end
