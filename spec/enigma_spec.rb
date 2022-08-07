@@ -14,9 +14,9 @@ RSpec.describe Enigma do
       expect(enigma.encrypt('hello world', '02715', '040895')).to eq(encrypted_hash)
     end
 
-    xit 'can decrypt the encrypted message' do
-      decrypted_hash = {encryption: 'hello world', key: '02715', date: '040895'}
-      expect(enigma.decrypt('keder ohulw', '02715', '040895'))
+    it 'can decrypt the encrypted message' do
+      decrypted_hash = {decryption: 'hello world', key: '02715', date: '040895'}
+      expect(enigma.decrypt('keder ohulw', '02715', '040895')).to eq(decrypted_hash)
     end
 
     xit 'can enrypt without specified date' do

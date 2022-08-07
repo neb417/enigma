@@ -28,7 +28,19 @@ class Enigma
     encrypted_hash[:date] = date
     return encrypted_hash
     # binding.pry
+  end
 
+  def decrypt(message, key, date)
+    decrypted_hash = {}
+    @message = message
+    @key = key
+    @date = date
+    breakout = message.split('')
+    breakout = breakout.each_slice(4).to_a
 
+    decrypted_hash[:decryption] = decode(breakout)
+    decrypted_hash[:key] = key
+    decrypted_hash[:date] = date
+    return decrypted_hash
   end
 end
