@@ -53,68 +53,83 @@ module Cypher
     breakout(enigma)
   end
   
-  def shift_key(instance_letter)
+  def shift_key(index)
     date_num = date_key.split('')
-    date_num = date_num[instance_letter]
-    key_num = "#{key_gen[instance_letter]}#{key_gen[instance_letter +1]}"
+    date_num = date_num[index]
+    key_num = "#{key_gen[index]}#{key_gen[index +1]}"
     return key_num.to_i + date_num.to_i
   end
   
   def whisk(breakout)
-    a_shift = shift_key(@a)
-    b_shift = shift_key(@b)
-    c_shift = shift_key(@c)
-    d_shift = shift_key(@d)
+    # a_shift = shift_key(@a)
+    # b_shift = shift_key(@b)
+    # c_shift = shift_key(@c)
+    # d_shift = shift_key(@d)
     # binding.pry
-
+    encryption =[]
+    breakout.each do |element|
+    element.each_with_index do |char, index|
+      # binding.pry
+      index_num = char_set.index(char) + shift_key(index)
+      search_index = index_num % char_set.count
+      encryption << char_set[search_index]
+    end
     # letter_list = breakout(enigma)
-      encryption = breakout.each do |element|
-        a_index_num = char_set.index(element[@a]) + a_shift
-        b_index_num = char_set.index(element[@b]) + b_shift
-        c_index_num = char_set.index(element[@c]) + c_shift
-        d_index_num = char_set.index(element[@d]) + d_shift if !element[@d].nil?
+      # encryption = breakout.each do |element|
+      #   a_index_num = char_set.index(element[@a]) + a_shift
+      #   b_index_num = char_set.index(element[@b]) + b_shift
+      #   c_index_num = char_set.index(element[@c]) + c_shift
+      #   d_index_num = char_set.index(element[@d]) + d_shift if !element[@d].nil?
   
-        a_search_index = a_index_num % char_set.count
-        b_search_index = b_index_num % char_set.count
-        c_search_index = c_index_num % char_set.count
-        d_search_index = d_index_num % char_set.count if !element[@d].nil?
+      #   a_search_index = a_index_num % char_set.count
+      #   b_search_index = b_index_num % char_set.count
+      #   c_search_index = c_index_num % char_set.count
+      #   d_search_index = d_index_num % char_set.count if !element[@d].nil?
 
-        element[@a] = char_set[a_search_index]
-        element[@b] = char_set[b_search_index]
-        element[@c] = char_set[c_search_index]
-        element[@d] = char_set[d_search_index] if !element[@d].nil?
+      #   element[@a] = char_set[a_search_index]
+      #   element[@b] = char_set[b_search_index]
+      #   element[@c] = char_set[c_search_index]
+      #   element[@d] = char_set[d_search_index] if !element[@d].nil?
         
-        element.rotate
+      #   element.rotate
       end
       encryption.join #flatten.join
     # binding.pry
   end
 
   def decode (breakout)
-    a_shift = shift_key(@a)
-    b_shift = shift_key(@b)
-    c_shift = shift_key(@c)
-    d_shift = shift_key(@d)
+    # a_shift = shift_key(@a)
+    # b_shift = shift_key(@b)
+    # c_shift = shift_key(@c)
+    # d_shift = shift_key(@d)
     set_char = char_set.reverse
     # binding.pry
-
+    decryption = []
     # letter_list = breakout(enigma)
-      decryption = breakout.each do |element|
-        a_index_num = set_char.index(element[@a]) + a_shift
-        b_index_num = set_char.index(element[@b]) + b_shift
-        c_index_num = set_char.index(element[@c]) + c_shift
-        d_index_num = set_char.index(element[@d]) + d_shift if !element[@d].nil?
-        a_search_index = a_index_num % char_set.count
-        b_search_index = b_index_num % char_set.count
-        c_search_index = c_index_num % char_set.count
-        d_search_index = d_index_num % char_set.count if !element[@d].nil?
+    breakout.each do |element|
+      element.each_with_index do |char, index|
+        # binding.pry
+        index_num = set_char.index(char) + shift_key(index)
+        search_index = index_num % char_set.count
+        decryption << set_char[search_index]
+      end
 
-        element[@a] = set_char[a_search_index]
-        element[@b] = set_char[b_search_index]
-        element[@c] = set_char[c_search_index]
-        element[@d] = set_char[d_search_index] if !element[@d].nil?
+      # decryption = breakout.each do |element|
+      #   a_index_num = set_char.index(element[@a]) + a_shift
+      #   b_index_num = set_char.index(element[@b]) + b_shift
+      #   c_index_num = set_char.index(element[@c]) + c_shift
+      #   d_index_num = set_char.index(element[@d]) + d_shift if !element[@d].nil?
+      #   a_search_index = a_index_num % char_set.count
+      #   b_search_index = b_index_num % char_set.count
+      #   c_search_index = c_index_num % char_set.count
+      #   d_search_index = d_index_num % char_set.count if !element[@d].nil?
+
+      #   element[@a] = set_char[a_search_index]
+      #   element[@b] = set_char[b_search_index]
+      #   element[@c] = set_char[c_search_index]
+      #   element[@d] = set_char[d_search_index] if !element[@d].nil?
         
-        element.rotate
+      #   element.rotate
       end
       decryption.join #flatten.join
    

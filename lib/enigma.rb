@@ -7,15 +7,15 @@ class Enigma
   
   def initialize
     @message = message
-    @key = key
-    @date = date
+    @key = key_gen
+    @date = date_gen
     @a = 0
     @b = 1
     @c = 2
     @d = 3
   end
 
-  def encrypt(message, key , date)
+  def encrypt(message, key = @key, date = @date)
     encrypted_hash = {}
     @message = message
     @key = key
@@ -30,7 +30,7 @@ class Enigma
     # binding.pry
   end
 
-  def decrypt(message, key, date)
+  def decrypt(message, key, date = @date)
     decrypted_hash = {}
     @message = message
     @key = key
