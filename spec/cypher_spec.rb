@@ -61,23 +61,23 @@ RSpec.describe Cypher do
     end
 
     it 'can breakout a message into parts' do
-      # iterate through message and apply offest to char
-      # in approptiate orders of 4.
       enigma.encrypt('hello world', '02715', '040895')
-      # message = enigma.message
-      # binding.pry
       expect(cypher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
-    xit 'can whisk a meassage' do
+    it 'can whisk a meassage' do
       # iterate through message and apply offest to char
       # in approptiate orders of 4.
+      # 1. index of 1st letter of message in char_set- h=7
+      # 2. add index of letter to a_shift. 10
+      # 3. 10 % 27 = remainder
+      # 4. char_set[remainder] = first new letter of string
       enigma.encrypt('hello world', '02715', '040895')
-      message = enigma.message
+      cypher.breakout(enigma)
 
-      message.each_slice(2)
+      # message.each_slice(2)
       # binding.pry
-      expect(cypher.whisk).to eq('keder ohulw')
+      expect(cypher.whisk(enigma)).to eq('k')
     end
   end
 end

@@ -37,6 +37,7 @@ class Cypher
     date_num = date_num.digits[3]
     key_num = "#{key_gen[0]}#{key_gen[1]}"
     shift = key_num.to_i + date_num
+    # binding.pry
   end
 
   def b_shift
@@ -66,10 +67,13 @@ class Cypher
     # binding.pry
     split.each_slice(4).to_a# {|letter| shift_array << letter}
     # shift_array
-
   end
 
-  # def whisk
-  #   binding.pry
-  # end
+  def whisk(enigma)
+    letter_list = breakout(enigma)
+    index_num = char_set.index(letter_list[0][0]) + a_shift
+    search_index = index_num % char_set.count
+    return char_set[search_index]
+    # binding.pry
+  end
 end
