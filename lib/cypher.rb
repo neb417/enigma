@@ -3,7 +3,7 @@ require 'date'
 require 'time'
 require 'pry'
 
-class Cypher
+module Cypher
 
   def initialize
     @a = 0
@@ -49,6 +49,10 @@ class Cypher
     # shift_array
   end
   
+  def encrypt_message
+    breakout(enigma)
+  end
+  
   def shift_key(instance_letter)
     date_num = date_key.split('')
     date_num = date_num[instance_letter]
@@ -56,14 +60,15 @@ class Cypher
     return key_num.to_i + date_num.to_i
   end
   
-  def whisk(enigma)
+  def whisk(breakout)
     a_shift = shift_key(@a)
     b_shift = shift_key(@b)
     c_shift = shift_key(@c)
     d_shift = shift_key(@d)
+    # binding.pry
 
-    letter_list = breakout(enigma)
-      letter_list.each do |element|
+    # letter_list = breakout(enigma)
+      encryption = breakout.each do |element|
         a_index_num = char_set.index(element[@a]) + a_shift
         b_index_num = char_set.index(element[@b]) + b_shift
         c_index_num = char_set.index(element[@c]) + c_shift
@@ -81,8 +86,12 @@ class Cypher
         
         element.rotate
       end
-      letter_list.flatten.join
+      encryption.join #flatten.join
     # binding.pry
+  end
+
+  def module_encryption
+    whisk(enigma)
   end
 
   def a_shift(enigma)
