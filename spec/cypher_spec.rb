@@ -65,7 +65,7 @@ RSpec.describe Cypher do
       expect(cypher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
-    xit 'can whisk a meassage' do
+    it 'can whisk a meassage' do
       # iterate through message and apply offest to char
       # in approptiate orders of 4.
       # 1. index of 1st letter of message in char_set- h=7
@@ -105,6 +105,14 @@ RSpec.describe Cypher do
       # add key_gen params to date_gen param
       enigma.encrypt('hello world', '02715', '040895')
       expect(cypher.d_shift(enigma)).to eq([["h", "e", "l", "e"], ["o", " ", "w", "h"], ["r", "l", "d"]])
+    end
+
+    xit 'can dor date_gen math and reorder for index pattern' do
+      expect(cypher.date_key).to eq('1025')
+    end
+
+    xit 'use one method to perform shifts' do
+      expect(cypher.shift(enigma)).to eq([['k', 'e', 'd', 'e'] ['r', ' ', 'o', 'h'],['i', 'l', 'w']])
     end
   end
 end
