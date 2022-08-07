@@ -31,28 +31,6 @@ class Cypher
     # digits[-4..-1]
     # binding.pry
   end
-
-  
-  def b_shift
-    date_num = date_gen.to_i ** 2
-    date_num = date_num.digits[2]
-    key_num = "#{key_gen[1]}#{key_gen[2]}"
-    shift = key_num.to_i + date_num
-  end
-  
-  def c_shift
-    date_num = date_gen.to_i ** 2
-    date_num = date_num.digits[1]
-    key_num = "#{key_gen[2]}#{key_gen[3]}"
-    shift = key_num.to_i + date_num
-  end
-  
-  def d_shift
-    date_num = date_gen.to_i ** 2
-    date_num = date_num.digits[0]
-    key_num = "#{key_gen[3]}#{key_gen[4]}"
-    shift = key_num.to_i + date_num
-  end
   
   def breakout(enigma)
     split = enigma.message.split("")
@@ -84,6 +62,55 @@ class Cypher
       index_num = char_set.index(element[0]) + shift
       search_index = index_num % char_set.count
       element[0] = char_set[search_index]
+      element.rotate
+    end
+    letter_list
+  end
+
+  def b_shift(enigma)
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[2]
+    key_num = "#{key_gen[1]}#{key_gen[2]}"
+    shift = key_num.to_i + date_num
+
+    letter_list = breakout(enigma)
+    letter_list.each do |element|
+      index_num = char_set.index(element[1]) + shift
+      search_index = index_num % char_set.count
+      element[1] = char_set[search_index]
+      element.rotate
+    end
+    letter_list
+  end
+
+  def c_shift(enigma)
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[1]
+    key_num = "#{key_gen[2]}#{key_gen[3]}"
+    shift = key_num.to_i + date_num
+
+    letter_list = breakout(enigma)
+    letter_list.each do |element|
+      index_num = char_set.index(element[2]) + shift
+      search_index = index_num % char_set.count
+      element[2] = char_set[search_index]
+      element.rotate
+    end
+    letter_list
+  end
+
+  def d_shift(enigma)
+    date_num = date_gen.to_i ** 2
+    date_num = date_num.digits[0]
+    key_num = "#{key_gen[3]}#{key_gen[4]}"
+    shift = key_num.to_i + date_num
+
+    letter_list = breakout(enigma)
+    letter_list.each do |element|
+      next if element[3] == nil 
+      index_num = char_set.index(element[3]) + shift
+      search_index = index_num % char_set.count
+      element[3] = char_set[search_index]
       element.rotate
     end
     letter_list

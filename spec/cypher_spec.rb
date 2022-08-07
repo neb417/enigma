@@ -65,7 +65,7 @@ RSpec.describe Cypher do
       expect(cypher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
-    it 'can whisk a meassage' do
+    xit 'can whisk a meassage' do
       # iterate through message and apply offest to char
       # in approptiate orders of 4.
       # 1. index of 1st letter of message in char_set- h=7
@@ -73,7 +73,6 @@ RSpec.describe Cypher do
       # 3. 10 % 27 = remainder
       # 4. char_set[remainder] = first new letter of string
       enigma.encrypt('hello world', '02715', '040895')
-      cypher.breakout(enigma)
 
       # message.each_slice(2)
       # binding.pry
@@ -89,22 +88,23 @@ RSpec.describe Cypher do
       expect(cypher.a_shift(enigma)).to eq([["k", "e", "l", "l"], ["r", " ", "w", "o"], ["u", "l", "d"]])
     end
 
-    xit 'can create an B shift' do
+    it 'can create an B shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:b_shift).and_return(27)
-      expect(cypher.b_shift).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+      enigma.encrypt('hello world', '02715', '040895')
+
+      expect(cypher.b_shift(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
-    xit 'can create an C shift' do
+    it 'can create an C shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:c_shift).and_return(73)
-      expect(cypher.c_shift).to eq([["h", "e", "d", "l"], ["o", " ", "o", "o"], ["w", "l", "w"]])
+      enigma.encrypt('hello world', '02715', '040895')
+      expect(cypher.c_shift(enigma)).to eq([["h", "e", "d", "l"], ["o", " ", "o", "o"], ["r", "l", "w"]])
     end
 
-    xit 'can create an D shift' do
+    it 'can create an D shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:d_shift).and_return(20)
-      expect(cypher.d_shift).to eq([["h", "e", "l", "r"], ["o", " ", "w", "h"], ["r", "l", "d"]])
+      enigma.encrypt('hello world', '02715', '040895')
+      expect(cypher.d_shift(enigma)).to eq([["h", "e", "l", "e"], ["o", " ", "w", "h"], ["r", "l", "d"]])
     end
   end
 end
