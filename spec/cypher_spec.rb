@@ -76,7 +76,8 @@ RSpec.describe Cypher do
 
       # message.each_slice(2)
       # binding.pry
-      expect(cypher.whisk(enigma)).to eq([["k", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+      allow(cypher).to receive(:whisk).and_return(20)
+      expect(cypher.whisk(enigma)).to eq(20)
     end
 
     it 'can create an A shift' do
@@ -107,12 +108,17 @@ RSpec.describe Cypher do
       expect(cypher.d_shift(enigma)).to eq([["h", "e", "l", "e"], ["o", " ", "w", "h"], ["r", "l", "d"]])
     end
 
-    xit 'can dor date_gen math and reorder for index pattern' do
+    it 'can dor date_gen math and reorder for index pattern' do
       expect(cypher.date_key).to eq('1025')
     end
 
-    xit 'use one method to perform shifts' do
-      expect(cypher.shift(enigma)).to eq([['k', 'e', 'd', 'e'] ['r', ' ', 'o', 'h'],['i', 'l', 'w']])
+    it 'uses one method to create shift_keys' do
+      allow(cypher).to receive(:shift_key).and_return(3)
+      expect(cypher.shift_key).to eq(3)#[['k', 'e', 'd', 'e'] ['r', ' ', 'o', 'h'],['i', 'l', 'w']])
+    end
+
+    it 'uses one method to perform shifts' do
+      expect(cypher.whisk(enigma)).to eq("keder ohulw")
     end
   end
 end

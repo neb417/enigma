@@ -6,7 +6,10 @@ require 'pry'
 class Cypher
 
   def initialize
-    # key = []
+    @a = 0
+    @b = 1
+    @c = 2
+    @d = 3
   end
 
   def char_set
@@ -31,6 +34,12 @@ class Cypher
     # digits[-4..-1]
     # binding.pry
   end
+
+  def date_key
+    date_key = (date_gen.to_i ** 2).to_s
+    date_key = date_key.slice(-4..-1)
+    date_key.rjust(4,"0")
+  end
   
   def breakout(enigma)
     split = enigma.message.split("")
@@ -40,13 +49,39 @@ class Cypher
     # shift_array
   end
   
+  def shift_key(instance_letter)
+    date_num = date_key.split('')
+    date_num = date_num[instance_letter]
+    key_num = "#{key_gen[instance_letter]}#{key_gen[instance_letter +1]}"
+    return key_num.to_i + date_num.to_i
+  end
+  
   def whisk(enigma)
+    a_shift = shift_key(@a)
+    b_shift = shift_key(@b)
+    c_shift = shift_key(@c)
+    d_shift = shift_key(@d)
+
     letter_list = breakout(enigma)
-    index_num = char_set.index(letter_list[0][0]) + a_shift
-    search_index = index_num % char_set.count
-    # binding.pry
-    letter_list[0][0] = char_set[search_index]
-    letter_list
+      letter_list.each do |element|
+        a_index_num = char_set.index(element[@a]) + a_shift
+        b_index_num = char_set.index(element[@b]) + b_shift
+        c_index_num = char_set.index(element[@c]) + c_shift
+        d_index_num = char_set.index(element[@d]) + d_shift if !element[@d].nil?
+  
+        a_search_index = a_index_num % char_set.count
+        b_search_index = b_index_num % char_set.count
+        c_search_index = c_index_num % char_set.count
+        d_search_index = d_index_num % char_set.count if !element[@d].nil?
+
+        element[@a] = char_set[a_search_index]
+        element[@b] = char_set[b_search_index]
+        element[@c] = char_set[c_search_index]
+        element[@d] = char_set[d_search_index] if !element[@d].nil?
+        
+        element.rotate
+      end
+      letter_list.flatten.join
     # binding.pry
   end
 
