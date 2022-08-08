@@ -1,5 +1,5 @@
 require_relative 'cypher'
-
+require 'pry'
 class Enigma
   include Cypher
   attr_reader :message, :key, :date
@@ -15,7 +15,7 @@ class Enigma
     message.downcase!
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
-
+binding.pry
     encrypted_hash[:encryption] = whisk(breakout, key, date, char_set)
     encrypted_hash[:key] = key
     encrypted_hash[:date] = date
