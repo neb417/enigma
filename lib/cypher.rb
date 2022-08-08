@@ -33,10 +33,13 @@ module Cypher
     encryption =[]
     breakout.each do |element|
       element.each_with_index do |char, index|
-        next if !char_set.include?(char)
+        if !char_set.include?(char)
+          encryption << char
+        else
         index_num = char_set.index(char) + shift_key(index, key, date)
         search_index = index_num % char_set.count
         encryption << char_set[search_index]
+        end
       end
     end
     encryption.join

@@ -12,7 +12,7 @@ class Enigma
 
   def encrypt(message, key = @key, date = @date)
     encrypted_hash = {}
-    message.downcase!
+    
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
 
