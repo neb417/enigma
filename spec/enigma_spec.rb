@@ -53,5 +53,14 @@ RSpec.describe Enigma do
 
       expect(enigma.encrypt('hello world!')).to eq(encrypted_hash)
     end
+
+    it 'can test edge cases with all caps' do
+      enigma.instance_variable_set(:@key, '94418')
+      enigma.instance_variable_set(:@date, '070822')
+
+      encrypted_hash = {:encryption=>"zaggfwrjihz", :key=>"94418", :date=>"070822"}
+
+      expect(enigma.encrypt('HELLO WORLD!')).to eq(encrypted_hash)
+    end
   end
 end
