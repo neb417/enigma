@@ -1,5 +1,5 @@
 require 'time'
-require 'pry'
+
 module Cypher
 
   def char_set
@@ -33,7 +33,6 @@ module Cypher
     encryption =[]
     breakout.each do |element|
       element.each_with_index do |char, index|
-        # next if !char_set.include?(char)
         if !char_set.include?(char)
           encryption << char
         else
@@ -43,7 +42,6 @@ module Cypher
         end
       end
     end
-    binding.pry
     encryption.join
   end
 end
