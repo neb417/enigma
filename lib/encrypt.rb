@@ -1,12 +1,14 @@
-require 'pry'
+require_relative 'enigma'
 
-msg_encrypt = File.open(ARGV[0],"r")
-message_to_encrypt = msg_encrypt.read
+enigma = Enigma.new
+
+encrypt = File.open(ARGV[0],"r")
+message_to_encrypt = encrypt.read
+encrypt.close
 
 encrypted_message = File.open(ARGV[1], "w")
+message = enigma.encrypt(message_to_encrypt)
+encrypted_message.write(message[:encryption])
+encrypted_message.close
 
-encrypted_message.write(message_to_encrypt.upcase)
-
-msg_encrypt.close
-
-puts message_to_encrypt
+puts "Created #{ARGV[1]} with key #{enigma.key} and date #{enigma.date}"

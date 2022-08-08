@@ -5,7 +5,6 @@
         "lines": [
           1,
           1,
-          1,
           null,
           1,
           9,
@@ -115,9 +114,6 @@
       "/Users/benjaminrandolph/turing/1mod/projects/enigma/lib/cypher.rb": {
         "lines": [
           1,
-          1,
-          1,
-          1,
           null,
           1,
           null,
@@ -164,6 +160,6 @@
         ]
       }
     },
-    "timestamp": 1659920368
+    "timestamp": 1659992926
   }
 }

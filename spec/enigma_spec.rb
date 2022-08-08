@@ -1,6 +1,5 @@
 require './lib/enigma'
 require './lib/cypher'
-require 'pry'
 
 RSpec.describe Enigma do
   let(:enigma) {described_class.new}

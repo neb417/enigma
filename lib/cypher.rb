@@ -1,7 +1,4 @@
-require 'enigma'
-require 'date'
 require 'time'
-require 'pry'
 
 module Cypher
 

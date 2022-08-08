@@ -1,5 +1,4 @@
-require 'pry'
-require 'cypher'
+require_relative 'cypher'
 
 class Enigma
   include Cypher
