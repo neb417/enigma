@@ -1,5 +1,4 @@
 require_relative 'enigma'
-
 enigma = Enigma.new
 
 encrypt = File.open(ARGV[0],"r")
