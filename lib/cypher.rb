@@ -32,28 +32,16 @@ module Cypher
     return key_num.to_i + date_num.to_i
   end
   
-  def whisk(breakout, key, date)
+  def whisk(breakout, key, date, char_set)
     encryption =[]
     breakout.each do |element|
       element.each_with_index do |char, index|
+        next if !char_set.include?(char)
         index_num = char_set.index(char) + shift_key(index, key, date)
         search_index = index_num % char_set.count
         encryption << char_set[search_index]
       end
     end
     encryption.join
-  end
-
-  def decode (breakout, key, date)
-    set_char = char_set.reverse
-    decryption = []
-    breakout.each do |element|
-      element.each_with_index do |char, index|
-        index_num = set_char.index(char) + shift_key(index, key, date)
-        search_index = index_num % char_set.count
-        decryption << set_char[search_index]
-      end
-    end
-    decryption.join
   end
 end
