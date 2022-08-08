@@ -1,4 +1,5 @@
 require_relative 'enigma'
+
 enigma = Enigma.new
 
 decrypt = File.new(ARGV[0], 'r')
