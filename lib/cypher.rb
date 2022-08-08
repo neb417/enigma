@@ -25,15 +25,6 @@ module Cypher
     date_key.rjust(4,"0")
   end
   
-  def breakout(enigma)
-    split = enigma.message.split("")
-    split.each_slice(4).to_a
-  end
-  
-  def encrypt_message
-    breakout(enigma)
-  end
-  
   def shift_key(index, key, date)
     date_num = date_key(date).split('')
     date_num = date_num[index]
