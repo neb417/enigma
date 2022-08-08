@@ -20,7 +20,7 @@ class Enigma
     encrypted_hash[:encryption] = whisk(breakout, key, date, char_set)
     encrypted_hash[:key] = key
     encrypted_hash[:date] = date
-    return encrypted_hash
+    encrypted_hash
   end
 
   def decrypt(message, key = @key, date = @date)
@@ -32,6 +32,6 @@ class Enigma
     decrypted_hash[:decryption] = whisk(breakout, key, date, char_set.reverse)
     decrypted_hash[:key] = key
     decrypted_hash[:date] = date
-    return decrypted_hash
+    decrypted_hash
   end
 end

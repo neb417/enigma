@@ -30,7 +30,7 @@ RSpec.describe Enigma do
 
     it 'can decrypt without a give date' do
       enigma.instance_variable_set(:@date, '070822')
-      
+
       decrypted_hash = {decryption: 'hello world', key: '02715', date: '070822'}
 
       expect(enigma.decrypt("okjdvfugyrb", '02715')).to eq(decrypted_hash)
