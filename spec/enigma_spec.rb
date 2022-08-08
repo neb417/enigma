@@ -1,4 +1,5 @@
 require './lib/enigma'
+require './lib/cypher'
 require 'pry'
 
 RSpec.describe Enigma do
@@ -30,10 +31,17 @@ RSpec.describe Enigma do
       expect(enigma.decrypt("okjdvfugyrb", '02715')).to eq(decrypted_hash)
     end
 
-    xit 'can encrypt without a given key or date' do
-      encrypted_hash = {encryption: 'keder ohulw', key: '02715', date: '040895'}
-
-      expect(enigma.encrypt('hello world')).to eq(encrypted_hash)
+    it 'can encrypt without a given key or date' do
+      # enigma = double(enigma)
+      # encrypted_hash = {encryption: 'keder ohulw', key: '02715', date: '040895'}
+      # allow(enigma).to receive(:encrypt).and_return('hello world', '94418', '070822')
+      # allow(Cypher).to receive(:key_gen).and_return('94418')
+      # allow(Cypher).to receive(:date_gen).and_return('070822')
+      # allow(enigma).to receive(:key_gen).and_return('94418')
+      # allow(enigma).instance_variable_set(:date, '070822')
+      # allow(enigma).to receive(:date).and_return('070822')
+      # binding.pry
+      expect(enigma.encrypt('hello world')).to eq({:encryption=>"zaggfwrjihz", :key=>"94418", :date=>"070822"})
     end
   end
 end

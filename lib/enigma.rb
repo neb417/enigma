@@ -13,7 +13,6 @@ class Enigma
 
   def encrypt(message, key = @key, date = @date)
     encrypted_hash = {}
-# binding.pry
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
 

@@ -12,18 +12,14 @@ module Cypher
   def key_gen
     random = rand(0..99999)
     random.to_s.rjust(5, "0")
-    # key = "02715"
   end
 
   def date_gen
     date = Time.new
     date = date.strftime("%d%m%y")
-    # date = ('040895')
   end
 
   def date_key(date)
-    # if not date
-      # date = date_gen
     date_key = (date.to_i ** 2).to_s
     date_key = date_key.slice(-4..-1)
     date_key.rjust(4,"0")
