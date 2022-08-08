@@ -13,23 +13,22 @@ class Enigma
 
   def encrypt(message, key = @key, date = @date)
     encrypted_hash = {}
-
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
 
-    encrypted_hash[:encryption] = whisk(breakout)
+    encrypted_hash[:encryption] = whisk(breakout, key, date)
     encrypted_hash[:key] = key
     encrypted_hash[:date] = date
     return encrypted_hash
   end
 
-  def decrypt(message, key, date = @date)
+  def decrypt(message, key = @key, date = @date)
     decrypted_hash = {}
 
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
 
-    decrypted_hash[:decryption] = decode(breakout)
+    decrypted_hash[:decryption] = decode(breakout, key, date)
     decrypted_hash[:key] = key
     decrypted_hash[:date] = date
     return decrypted_hash
