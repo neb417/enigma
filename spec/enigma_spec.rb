@@ -1,5 +1,5 @@
 require './lib/enigma'
-require './lib/cypher'
+require './lib/cipher'
 
 RSpec.describe Enigma do
   let(:enigma) {described_class.new}
@@ -47,17 +47,19 @@ RSpec.describe Enigma do
     it 'can test edge cases with unknown characters' do
       enigma.instance_variable_set(:@key, '94418')
       enigma.instance_variable_set(:@date, '070822')
-
-      encrypted_hash = {:encryption=>"zaggfwrjihz", :key=>"94418", :date=>"070822"}
-
+      enigma.instance_variable_set(:@message, 'hello world!')
+      encrypted_hash = {:encryption=>"zaggfwrjihz!", :key=>"94418", :date=>"070822"}
+      
       expect(enigma.encrypt('hello world!')).to eq(encrypted_hash)
     end
-
+    
     it 'can test edge cases with all caps' do
       enigma.instance_variable_set(:@key, '94418')
       enigma.instance_variable_set(:@date, '070822')
+      enigma.instance_variable_set(:@message, 'hello world!')
+      allow(enigma).to receive(:encrypt).and_return({:encryption=>"zaggfwrjihz!", :key=>"94418", :date=>"070822"})
 
-      encrypted_hash = {:encryption=>"zaggfwrjihz", :key=>"94418", :date=>"070822"}
+      encrypted_hash = {:encryption=>"zaggfwrjihz!", :key=>"94418", :date=>"070822"}
 
       expect(enigma.encrypt('HELLO WORLD!')).to eq(encrypted_hash)
     end

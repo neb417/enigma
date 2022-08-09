@@ -1,7 +1,7 @@
-require_relative 'cypher'
+require_relative 'cipher'
 
 class Enigma
-  include Cypher
+  include Cipher
   attr_reader :message, :key, :date
   
   def initialize
@@ -12,7 +12,7 @@ class Enigma
 
   def encrypt(message, key = @key, date = @date)
     encrypted_hash = {}
-    
+    # message.downcase!
     breakout = message.split('')
     breakout = breakout.each_slice(4).to_a
 

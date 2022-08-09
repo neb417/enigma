@@ -1,26 +1,26 @@
 require './lib/enigma'
-require './lib/cypher'
+require './lib/cipher'
 
-RSpec.describe Cypher do
-  let(:cypher) {described_class.new}
+RSpec.describe Cipher do
+  let(:cipher) {described_class.new}
   let(:enigma) {Enigma.new}
 
-  contex 'These tests were used when Cypher was a Class' do
+  contex 'These tests were used when Cipher was a Class' do
   end
 
-  describe 'tests for Cypher class with enigma.encrypt(all arguments)' do
+  describe 'tests for Cipher class with enigma.encrypt(all arguments)' do
 
     before(:each) do
       enigma.encrypt('hello world', '02715', '040895')
     end
 
     xit 'exists' do
-      expect(cypher).to be_a(Cypher)
+      expect(cipher).to be_a(Cipher)
     end
 
     xit 'has a char_set to choose from' do
-      allow(cypher).to receive(:char_set).and_return('letter array')
-      expect(cypher.char_set).to eq('letter array')
+      allow(cipher).to receive(:char_set).and_return('letter array')
+      expect(cipher.char_set).to eq('letter array')
     end
 
     xit 'can process a key into a key generator' do
@@ -29,42 +29,42 @@ RSpec.describe Cypher do
       # 'A' = [0][1], 'B' = [1][2], 'C' = [2][3] 'D' = [3][4]
       # ['A','B', 'C', 'D']
       # [02,27,71,15]
-      expect(cypher.key_gen).to eq("02715")
+      expect(cipher.key_gen).to eq("02715")
     end
 
     xit 'can generate a date' do
       #will generate a today's date, format to DDMMYY
       #convert to integer, square the integer, and use last 4 digits
-      expect(cypher.date_gen).to eq("040895")
+      expect(cipher.date_gen).to eq("040895")
     end
 
     xit 'can create an A shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:a_shift).and_return(3)
-      expect(cypher.a_shift).to eq(3)
+      allow(cipher).to receive(:a_shift).and_return(3)
+      expect(cipher.a_shift).to eq(3)
     end
 
     xit 'can create an B shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:b_shift).and_return(27)
-      expect(cypher.b_shift).to eq(27)
+      allow(cipher).to receive(:b_shift).and_return(27)
+      expect(cipher.b_shift).to eq(27)
     end
 
     xit 'can create an C shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:c_shift).and_return(73)
-      expect(cypher.c_shift).to eq(73)
+      allow(cipher).to receive(:c_shift).and_return(73)
+      expect(cipher.c_shift).to eq(73)
     end
 
     xit 'can create an D shift' do
       # add key_gen params to date_gen param
-      allow(cypher).to receive(:d_shift).and_return(20)
-      expect(cypher.d_shift).to eq(20)
+      allow(cipher).to receive(:d_shift).and_return(20)
+      expect(cipher.d_shift).to eq(20)
     end
 
     xit 'can breakout a message into parts' do
       enigma.encrypt('hello world', '02715', '040895')
-      expect(cypher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+      expect(cipher.breakout(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
     xit 'can whisk a meassage' do
@@ -78,49 +78,49 @@ RSpec.describe Cypher do
 
       # message.each_slice(2)
       # binding.pry
-      allow(cypher).to receive(:whisk).and_return(20)
-      expect(cypher.whisk(enigma)).to eq(20)
+      allow(cipher).to receive(:whisk).and_return(20)
+      expect(cipher.whisk(enigma)).to eq(20)
     end
 
     xit 'can create an A shift' do
       # add key_gen params to date_gen param
       enigma.encrypt('hello world', '02715', '040895')
-      cypher.breakout(enigma)
+      cipher.breakout(enigma)
 
 
-      expect(cypher.a_shift(enigma)).to eq([["k", "e", "l", "l"], ["r", " ", "w", "o"], ["u", "l", "d"]])
+      expect(cipher.a_shift(enigma)).to eq([["k", "e", "l", "l"], ["r", " ", "w", "o"], ["u", "l", "d"]])
     end
 
     xit 'can create an B shift' do
       # add key_gen params to date_gen param
       enigma.encrypt('hello world', '02715', '040895')
 
-      expect(cypher.b_shift(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
+      expect(cipher.b_shift(enigma)).to eq([["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]])
     end
 
     xit 'can create an C shift' do
       # add key_gen params to date_gen param
       enigma.encrypt('hello world', '02715', '040895')
-      expect(cypher.c_shift(enigma)).to eq([["h", "e", "d", "l"], ["o", " ", "o", "o"], ["r", "l", "w"]])
+      expect(cipher.c_shift(enigma)).to eq([["h", "e", "d", "l"], ["o", " ", "o", "o"], ["r", "l", "w"]])
     end
 
     xit 'can create an D shift' do
       # add key_gen params to date_gen param
       enigma.encrypt('hello world', '02715', '040895')
-      expect(cypher.d_shift(enigma)).to eq([["h", "e", "l", "e"], ["o", " ", "w", "h"], ["r", "l", "d"]])
+      expect(cipher.d_shift(enigma)).to eq([["h", "e", "l", "e"], ["o", " ", "w", "h"], ["r", "l", "d"]])
     end
 
     xit 'can dor date_gen math and reorder for index pattern' do
-      expect(cypher.date_key).to eq('1025')
+      expect(cipher.date_key).to eq('1025')
     end
 
     xit 'uses one method to create shift_keys' do
-      allow(cypher).to receive(:shift_key).and_return(3)
-      expect(cypher.shift_key).to eq(3)#[['k', 'e', 'd', 'e'] ['r', ' ', 'o', 'h'],['i', 'l', 'w']])
+      allow(cipher).to receive(:shift_key).and_return(3)
+      expect(cipher.shift_key).to eq(3)#[['k', 'e', 'd', 'e'] ['r', ' ', 'o', 'h'],['i', 'l', 'w']])
     end
 
     xit 'uses one method to perform shifts' do
-      expect(cypher.whisk(enigma)).to eq("keder ohulw")
+      expect(cipher.whisk(enigma)).to eq("keder ohulw")
     end
   end
 end
