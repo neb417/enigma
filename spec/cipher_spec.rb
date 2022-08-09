@@ -1,6 +1,5 @@
 require './lib/enigma'
 require './lib/cipher'
-require 'time'
 
 RSpec.describe Cipher do
   let(:enigma) { Enigma.new }

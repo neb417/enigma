@@ -31,11 +31,8 @@ class Enigma
 
   # def crack(message, date)
   #   cracked_hash = {}
-  #   to_crack = message.reverse!
-  #   to_crack = breakout(to_crack)
-  #   to_crack = to_crack[0].reverse!
-  #   # binding.pry
-  #   cracked_hash[:decryption] = cracker(to_crack, date, char_set.reverse)
+  #   breakout(message)
+  #   cracked_hash[:decryption] = cracker(message, date, char_set.reverse)
   #   cracked_hash[:key] = key.reverse
   #   cracked_hash[:date] = date.reverse
   #   cracked_hash

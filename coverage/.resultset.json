@@ -5,7 +5,7 @@
         "lines": [
           1,
           1,
-          1,
+          null,
           null,
           1,
           7,
@@ -93,15 +93,11 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
           null
         ]
       },
       "/Users/benjaminrandolph/turing/1mod/projects/enigma/lib/cipher.rb": {
         "lines": [
-          1,
           1,
           null,
           1,
@@ -141,25 +137,18 @@
           14,
           14,
           43,
-          null,
           159,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           14,
           null,
           null,
           1,
+          158,
+          158,
           null,
-          158,
-          158,
+          null,
+          null,
           null,
           null,
           null,
@@ -272,6 +261,6 @@
         ]
       }
     },
-    "timestamp": 1660077994
+    "timestamp": 1660080407
   }
 }

@@ -1,5 +1,4 @@
 require 'time'
-require 'pry'
 
 module Cipher
   def char_set
@@ -38,28 +37,18 @@ module Cipher
     encryption = []
     brokeout.each do |element|
       element.each_with_index do |char, index|
-        # encryption << char unless char_set.include?(char)
         char_set.include?(char) ? encryption << index_find(char_set, char, index, key, date) : encryption << char
-        # if !char_set.include?(char)
-        #   encryption << char
-        # else
-        # indexed = char_set.rotate(char_set.index(char) + shift_key(index, key, date))
-        # search_index = index_num % char_set.count
-        # binding.pry
-        # encryption << indexed(char)[0]
-        # end
       end
     end
     encryption.join
   end
 
   def index_find(char_set, char, index, key, date)
-    # binding.pry
     indexed = char_set.rotate(char_set.index(char) + shift_key(index, key, date))
     indexed[0]
-    # binding.pry
   end
-  # def cracker(breakout, date, char_set)
+  
+  # def cracker(message, breakout, date, char_set)
   #   encryption =[]
   #   breakout.each do |element|
   #     element.each_with_index do |char, index|
@@ -72,6 +61,9 @@ module Cipher
   #       end
   #     end
   #   end
-  #   encryption.join
+  #     encryption.join
   # end
+  # enrc[idx] - unenc[idx] = offest, if offest == -int (offset + char_set.count)
+  # offset - date_key = number
+  # array << if  a_offset[1] == b_offset[0]
 end
