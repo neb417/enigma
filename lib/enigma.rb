@@ -1,11 +1,10 @@
 require_relative 'cipher'
-require 'pry'
+
 class Enigma
   include Cipher
-  attr_reader :message, :key, :date
-  
+  attr_reader :key, :date
+
   def initialize
-    @message = message
     @key = key_gen
     @date = date_gen
   end
@@ -19,24 +18,26 @@ class Enigma
     encrypted_hash[:date] = date
     encrypted_hash
   end
-  
+
   def decrypt(message, key = @key, date = @date)
     decrypted_hash = {}
     brokeout = breakout(message)
-    
+
     decrypted_hash[:decryption] = whisk(brokeout, key, date, char_set.reverse)
     decrypted_hash[:key] = key
     decrypted_hash[:date] = date
     decrypted_hash
   end
 
-  def crack(message, date)
-    cracked_hash = {}
-    brokeout = breakout(message)
-    
-    cracked_hash[:decryption] = cracker(brokeout, date, char_set.reverse)
-    cracked_hash[:key] = key.reverse
-    cracked_hash[:date] = date.reverse
-    cracked_hash
-  end
+  # def crack(message, date)
+  #   cracked_hash = {}
+  #   to_crack = message.reverse!
+  #   to_crack = breakout(to_crack)
+  #   to_crack = to_crack[0].reverse!
+  #   # binding.pry
+  #   cracked_hash[:decryption] = cracker(to_crack, date, char_set.reverse)
+  #   cracked_hash[:key] = key.reverse
+  #   cracked_hash[:date] = date.reverse
+  #   cracked_hash
+  # end
 end
