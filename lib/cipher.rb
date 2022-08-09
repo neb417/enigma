@@ -28,15 +28,44 @@ module Cipher
     key_num = "#{key[index]}#{key[index +1]}"
     return key_num.to_i + date_num.to_i
   end
+
+  def breakout(message)
+    lists_of_four = message.split('')
+    lists_of_four = lists_of_four.each_slice(4).to_a
+    lists_of_four
+  end
   
-  def whisk(breakout, key, date, char_set)
+  def whisk(brokeout, key, date, char_set)
+    encryption =[]
+    brokeout.each do |element|
+      element.each_with_index do |char, index|
+        if !char_set.include?(char)
+          encryption << char
+        else
+        index_num = char_set.index(char) + shift_key(index, key, date)
+        search_index = index_num % char_set.count
+        encryption << char_set[search_index]
+        end
+      end
+    end
+    encryption.join
+  end
+
+  def crack_shift_key(index, key, date)
+    date_num = date_key(date).split('')
+    date_num = date_num[index]
+    key_num = "#{key[index]}#{key[index +1]}"
+    return key_num.to_i + date_num.to_i
+  end
+
+  def cracker(breakout, date, char_set)
     encryption =[]
     breakout.each do |element|
       element.each_with_index do |char, index|
         if !char_set.include?(char)
           encryption << char
         else
-        index_num = char_set.index(char) + shift_key(index, key, date)
+        index_num = char_set.index(char) + crack_shift_key(index, key, date)
         search_index = index_num % char_set.count
         encryption << char_set[search_index]
         end

@@ -68,16 +68,22 @@ RSpec.describe Enigma do
 
   describe 'Cracking the message without key' do
 
-    it 'can decrypt the crack message with key' do
+    it 'can encrypt the crack message with key' do
       expected_hash = {encryption: "vjqtbeaweqihssi", key: "08304", date: "291018"}
       
       expect(enigma.encrypt("hello world end", "08304", "291018")).to eq(expected_hash)
     end
     
-    xit 'can crack message with out a key' do
+    xit 'can crack message without a key' do
       expected_hash = {decryption: "hello world end", key: "08304", date: "291018"}
 
-      expect(enigma.crack("hello world end", "291018")).to eq(expected_hash)
+      expect(enigma.crack("vjqtbeaweqihssi", "291018")).to eq(expected_hash)
+    end
+
+    xit 'can crack message without a key or date' do
+      expected_hash = {decryption: "hello world end", key: "08304", date: "090822"}
+
+      expect(enigma.crack("vjqtbeaweqihssi")).to eq(expected_hash)
     end
   end
 end
