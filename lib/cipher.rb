@@ -47,23 +47,4 @@ module Cipher
     indexed = char_set.rotate(char_set.index(char) + shift_key(index, key, date))
     indexed[0]
   end
-  
-  # def cracker(message, breakout, date, char_set)
-  #   encryption =[]
-  #   breakout.each do |element|
-  #     element.each_with_index do |char, index|
-  #       if !char_set.include?(char)
-  #         encryption << char
-  #       else
-  #       index_num = char_set.index(char) + crack_shift_key(index, key, date)
-  #       search_index = index_num % char_set.count
-  #       encryption << char_set[search_index]
-  #       end
-  #     end
-  #   end
-  #     encryption.join
-  # end
-  # enrc[idx] - unenc[idx] = offest, if offest == -int (offset + char_set.count)
-  # offset - date_key = number
-  # array << if  a_offset[1] == b_offset[0]
 end

@@ -28,13 +28,4 @@ class Enigma
     decrypted_hash[:date] = date
     decrypted_hash
   end
-
-  # def crack(message, date)
-  #   cracked_hash = {}
-  #   breakout(message)
-  #   cracked_hash[:decryption] = cracker(message, date, char_set.reverse)
-  #   cracked_hash[:key] = key.reverse
-  #   cracked_hash[:date] = date.reverse
-  #   cracked_hash
-  # end
 end
